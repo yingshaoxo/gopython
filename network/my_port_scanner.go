@@ -1,3 +1,4 @@
+// We use this package to do port scanning for a host or many hosts
 package port_scanner
 
 import (
@@ -10,6 +11,7 @@ import (
 
 var timeout time.Duration = time.Duration(1000 * 1000 * 500) // 0.5 second
 
+// We can set timeout for each scanning
 func SetTimeOut(millisecond int) {
 	timeout = time.Duration(1000 * 1000 * millisecond)
 }
@@ -72,6 +74,7 @@ func scan_ports(hosts []string, startPort int, endPort int) []string {
 	return urls
 }
 
+// We can scan ports for a single host
 func ScanPorts(host string, startPort int, endPort int) string {
 	var hosts = []string{host}
 	urls := scan_ports(hosts, startPort, endPort)
@@ -83,6 +86,7 @@ func ScanPorts(host string, startPort int, endPort int) string {
 	}
 }
 
+// Get a range of hosts in a given network
 func GetAllHostsOfANetwork(network string) []string {
 	hosts := make([]string, 0)
 
@@ -111,6 +115,8 @@ func GetAllHostsOfANetwork(network string) []string {
 	return hosts
 }
 
+// We can scan ports for a whole network, such as:
+// 	192.168.1.1/24
 func ScanPortsOfANetwork(network string, startPort int, endPort int) string {
 	hosts := GetAllHostsOfANetwork(network)
 

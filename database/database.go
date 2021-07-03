@@ -1,3 +1,4 @@
+// We use this package to handle databases
 package database
 
 import (
