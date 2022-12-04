@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func Print(anything string) {
+func Print(anything interface{}) {
 	fmt.Println(anything)
 }
 
