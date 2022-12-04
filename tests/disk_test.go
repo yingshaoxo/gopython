@@ -12,3 +12,12 @@ func Test_get_pwd(t *testing.T) {
 		t.Fatalf("This function should return the current path as a string!")
 	}
 }
+
+func Test_path_join(t *testing.T) {
+	path1 := "/home"
+	path2 := "yingshaoxo"
+	result := disk_tool.Path_join(path1, path2)
+	if result != "/home/yingshaoxo" {
+		t.Fatalf("result should be '/home/yingshaoxo'")
+	}
+}
