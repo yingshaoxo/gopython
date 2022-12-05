@@ -2,6 +2,8 @@ package string_tool
 
 import (
 	"encoding/json"
+
+	"github.com/yingshaoxo/gopython/string_tool"
 )
 
 func Convert_struct_object_to_map(an_object interface{}) (map[string]interface{}, error) {
@@ -25,7 +27,7 @@ func Convert_map_to_json_string(a_dict map[string]interface{}) string {
 	if err != nil {
 		return ""
 	}
-	return Bytes_to_string(json_bytes)
+	return string_tool.Bytes_to_string(json_bytes)
 }
 
 func Convert_struct_object_to_json_string(an_object interface{}) string {
@@ -34,7 +36,7 @@ func Convert_struct_object_to_json_string(an_object interface{}) string {
 		return ""
 	}
 
-	return Bytes_to_string(json_bytes)
+	return string_tool.Bytes_to_string(json_bytes)
 }
 
 func Convert_bytes_json_data_to_map(data []byte) (map[string]interface{}, error) {
