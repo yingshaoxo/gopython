@@ -2,10 +2,37 @@ package disk_tool
 
 import (
 	"os"
+	"os/user"
 	"path/filepath"
+	"strings"
 
 	"github.com/yingshaoxo/gopython/built_in_functions"
 )
+
+func Exists(path string) bool {
+	if _, err := os.Stat(path); err == nil {
+		return true
+	} else {
+		return false
+	}
+}
+
+func Get_absolute_path(path string) string {
+	usr, _ := user.Current()
+	home_directory := usr.HomeDir
+
+	var absolute_path string
+
+	if path == "~" {
+		absolute_path = home_directory
+	} else if strings.HasPrefix(path, "~/") {
+		absolute_path = filepath.Join(home_directory, path[2:])
+	} else {
+		absolute_path, _ = filepath.Abs(path)
+	}
+
+	return absolute_path
+}
 
 func Get_current_working_directory() string {
 	path, err := os.Getwd()
