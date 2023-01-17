@@ -5,7 +5,7 @@ import (
 	"reflect"
 )
 
-func PrintOutPropertysOfAFunction(function interface{}) {
+func Print_out_propertys_of_a_function(function interface{}) {
 	functionType := reflect.TypeOf(function)
 	functionValue := reflect.ValueOf(function)
 	functionName := functionType.Name()
