@@ -34,17 +34,6 @@ func TestGetAllReachablePortsFromNetwork(t *testing.T) {
 	*/
 }
 
-func TestGetAllReachablePortsFromNetwork2(t *testing.T) {
-	port_scanner.SetScanningTimeOut(100)
-	urls := port_scanner.ScanPortsOfANetwork("192.168.50.0/16", 5000, 5010)
-	log.Println(urls)
-	/*
-		if len(urls) < 1 {
-			t.Fatalf("we should get a lot of hosts here")
-		}
-	*/
-}
-
 func TestFakePing(t *testing.T) {
 	if port_scanner.FakePing("localhost:80", 100) == false {
 		t.Fatalf("localhost:80 should have something")
