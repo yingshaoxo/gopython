@@ -36,7 +36,7 @@ func MyRedis(host string, port string, database_number int) MyRedis_Type {
 }
 
 func (self *MyRedis_Type) Stop() {
-	defer self.Cancel_function()
+	defer self.cancel_function()
 	if err := self.Redis_client.Close(); err != nil {
 		panic(err)
 	}
