@@ -9,6 +9,14 @@ func Int_to_string(number int) string {
 	return strconv.Itoa(number)
 }
 
+func String_to_int(number string, default_value_when_error_happen int) int {
+	value, err := strconv.Atoi(number)
+	if err != nil {
+		return default_value_when_error_happen
+	}
+	return value
+}
+
 func Int64_to_string(number int64) string {
 	return strconv.FormatInt(number, 10)
 }
