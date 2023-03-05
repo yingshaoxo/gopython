@@ -1,4 +1,4 @@
-package listTool
+package list_tool
 
 import "math/rand"
 

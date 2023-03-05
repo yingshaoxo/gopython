@@ -1,4 +1,4 @@
-package functionTool
+package function_tool
 
 import (
 	"fmt"

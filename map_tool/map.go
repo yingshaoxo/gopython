@@ -1,4 +1,4 @@
-package mapTool
+package map_tool
 
 func Check_if_a_key_is_in_the_map(key string, mapData map[string]interface{}) bool {
 	_, ok := mapData[key]
