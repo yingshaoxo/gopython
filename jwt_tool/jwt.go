@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/yingshaoxo/gopython/string_tool"
 )
 
 func Jwt_encode(data map[string]interface{}, secret_string string) string {
@@ -12,8 +13,10 @@ func Jwt_encode(data map[string]interface{}, secret_string string) string {
 		new_data[key] = value
 	}
 
+	secret_string_bytes := string_tool.String_to_bytes(secret_string)
+
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, new_data)
-	token_string, _ := token.SignedString(secret_string)
+	token_string, _ := token.SignedString(secret_string_bytes)
 
 	return token_string
 }

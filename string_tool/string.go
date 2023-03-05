@@ -1,6 +1,8 @@
 package string_tool
 
 import (
+	"math"
+	"math/big"
 	"strconv"
 	"strings"
 )
@@ -33,8 +35,25 @@ func Float64_to_int(number float64) int {
 	return int(number)
 }
 
+func round(num float64) int {
+	return int(num + math.Copysign(0.5, num))
+}
+
+func Float64_to_string(number float64, numbers_after_decimal int) string {
+	return big.NewFloat(number).Text('f', numbers_after_decimal)
+	// numbers_after_decimal_string := Int_to_string(numbers_after_decimal)
+	// return fmt.Sprintf(
+	// 	"%."+numbers_after_decimal_string+"f",
+	// 	number,
+	// )
+}
+
 func Bytes_to_string(data []byte) string {
 	return string(data)
+}
+
+func String_to_bytes(data string) []byte {
+	return []byte(data)
 }
 
 func Has_substring(data string, subString string) bool {
