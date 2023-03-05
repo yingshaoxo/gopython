@@ -10,7 +10,7 @@ func Test_redis(t *testing.T) {
 	my_redis := database.MyRedis(
 		"127.0.0.1",
 		"6379",
-		4,
+		"4",
 	)
 
 	//my_redis.Set("hi", "you", 3000)

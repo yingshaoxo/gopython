@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/redis/go-redis/v9"
+	"github.com/yingshaoxo/gopython/string_tool"
 )
 
 type MyRedis_Type struct {
@@ -15,7 +16,7 @@ type MyRedis_Type struct {
 	cancel_function context.CancelFunc
 }
 
-func MyRedis(host string, port string, database_number int) MyRedis_Type {
+func MyRedis(host string, port string, database_number string) MyRedis_Type {
 	address := fmt.Sprintf("%s:%s", host, port)
 
 	the_context, the_cancel_function := context.WithCancel(context.Background())
@@ -23,7 +24,7 @@ func MyRedis(host string, port string, database_number int) MyRedis_Type {
 	raw_redis := redis.NewClient(&redis.Options{
 		Addr:     address,
 		Password: "",
-		DB:       database_number,
+		DB:       string_tool.String_to_int(database_number, 0),
 	})
 
 	my_redis := MyRedis_Type{
