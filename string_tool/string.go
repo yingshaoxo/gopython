@@ -1,8 +1,7 @@
 package string_tool
 
 import (
-	"encoding/binary"
-	"math"
+	"fmt"
 	"math/big"
 	"strconv"
 	"strings"
@@ -97,17 +96,17 @@ func String_to_bytes(data string) []byte {
 	return []byte(data)
 }
 
-func Bytes_to_float64(bytes []byte) float64 {
-	bits := binary.LittleEndian.Uint64(bytes)
-	float := math.Float64frombits(bits)
-	return float
+func StringBytes_to_float64(bytes []byte, default_value_when_error_happen float64) float64 {
+	f, err := strconv.ParseFloat(string(bytes), 64)
+	if err != nil {
+		fmt.Println(err)
+		return default_value_when_error_happen
+	}
+	return f
 }
 
-func Float64_to_bytes(float float64) []byte {
-	bits := math.Float64bits(float)
-	bytes := make([]byte, 8)
-	binary.LittleEndian.PutUint64(bytes, bits)
-	return bytes
+func Float64_to_StringBytes(number float64, numbers_after_decimal int) []byte {
+	return []byte(Float64_to_string(number, numbers_after_decimal))
 }
 
 func Has_substring(data string, subString string) bool {
