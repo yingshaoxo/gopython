@@ -2,10 +2,15 @@ package built_in_functions
 
 import (
 	"fmt"
+	"reflect"
 )
 
 func Print(anything interface{}) {
 	fmt.Println(anything)
+}
+
+func Type(anything interface{}) reflect.Type {
+	return reflect.TypeOf(anything)
 }
 
 // A
