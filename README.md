@@ -32,6 +32,31 @@ func main() {
 }
 ```
 
+### Nullable
+```go
+package main
+
+import (
+	"fmt"
+
+	variable_tool "github.com/yingshaoxo/gopython/variable_tool"
+)
+
+func main() {
+	hi := "hi"
+	ok := "ok"
+
+	a_string := variable_tool.Nullable[*string]{Value: &hi, Is_null: true}
+	fmt.Println(*a_string.Value)
+	fmt.Println(a_string.Is_null)
+
+	a_string.Value = &ok
+	a_string.Is_null = false
+	fmt.Println(*a_string.Value)
+	fmt.Println(a_string.Is_null)
+}
+```
+
 ### JWT (json web token)
 ```go
 package main
