@@ -5,3 +5,8 @@ type Nullable[T any] struct {
 	Is_null bool
 	Value   T
 }
+
+type Result[T any] struct {
+	value Nullable[T]
+	Error string
+}
