@@ -11,7 +11,8 @@ func Test_nullable(t *testing.T) {
 	hi := "hi"
 	ok := "ok"
 
-	a_string := variable_tool.Nullable[*string]{Value: &hi, Is_null: true}
+	a_string := variable_tool.Nullable(&hi)
+	a_string.Is_null = true
 	fmt.Println(*a_string.Value)
 	fmt.Println(a_string.Is_null)
 
@@ -19,4 +20,13 @@ func Test_nullable(t *testing.T) {
 	a_string.Is_null = false
 	fmt.Println(*a_string.Value)
 	fmt.Println(a_string.Is_null)
+}
+
+func Test_result(t *testing.T) {
+	hi := "hi"
+
+	a_string := variable_tool.Result(&hi)
+	a_string.Error = "error"
+	fmt.Println(a_string.Error)
+	fmt.Println(*a_string.Value.Value)
 }

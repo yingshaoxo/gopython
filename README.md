@@ -46,7 +46,8 @@ func main() {
 	hi := "hi"
 	ok := "ok"
 
-	a_string := variable_tool.Nullable[*string]{Value: &hi, Is_null: true}
+	a_string := variable_tool.Nullable(&hi)
+	a_string.Is_null = true
 	fmt.Println(*a_string.Value)
 	fmt.Println(a_string.Is_null)
 
