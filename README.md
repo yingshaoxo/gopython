@@ -6,7 +6,7 @@ Let you write go as if you were writing Python.
 go get github.com/yingshaoxo/gopython
 ```
 
-### try-catch
+### Try-Catch
 ```go
 package main
 
@@ -83,7 +83,7 @@ func main() {
 }
 ```
 
-### network
+### Network
 ```go
 package main
 
