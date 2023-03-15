@@ -1,3 +1,4 @@
+// We handle time related problems here
 package time_tool
 
 import "time"

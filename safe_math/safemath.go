@@ -1,3 +1,4 @@
+// We do safe math here, for example, handle big numbers for financial problems
 package safe_math
 
 import "github.com/shopspring/decimal"

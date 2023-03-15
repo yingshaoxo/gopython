@@ -1,3 +1,4 @@
+// We handle terminal/bash/shell problems here
 package terminal_tool
 
 import (

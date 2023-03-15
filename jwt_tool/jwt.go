@@ -1,3 +1,4 @@
+// We handle json web token related problems here
 package jwt_tool
 
 import (

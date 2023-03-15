@@ -1,3 +1,4 @@
+// We handle string related problems here
 package string_tool
 
 import (

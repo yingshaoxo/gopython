@@ -1,3 +1,4 @@
+// We handle error related work here
 package error_tool
 
 import (

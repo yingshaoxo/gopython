@@ -1,3 +1,4 @@
+// We handle function related work here
 package function_tool
 
 import (

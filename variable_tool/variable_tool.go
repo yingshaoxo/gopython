@@ -1,3 +1,4 @@
+// We handle variable related problems here, for example, is the variable nullable
 package variable_tool
 
 type Nullable[T any] struct {

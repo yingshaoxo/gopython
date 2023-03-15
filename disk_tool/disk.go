@@ -1,3 +1,4 @@
+// We do disk(storage) related work here
 package disk_tool
 
 import (

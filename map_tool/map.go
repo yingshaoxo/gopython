@@ -1,3 +1,4 @@
+// We handle dictionary/map/key-value related problems here
 package map_tool
 
 func Check_if_a_key_is_in_the_map(key string, mapData map[string]interface{}) bool {
