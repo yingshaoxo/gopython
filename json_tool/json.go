@@ -23,6 +23,24 @@ func Convert_struct_object_to_map(an_object interface{}) (map[string]interface{}
 	return a_dict, nil
 }
 
+func Convert_json_string_to_map(json_string string) (map[string]interface{}, error) {
+	var result map[string]interface{}
+	err := json.Unmarshal([]byte(json_string), &result)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func Convert_bytes_json_data_to_map(data []byte) (map[string]interface{}, error) {
+	var result map[string]interface{}
+	err := json.Unmarshal(data, &result)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 func Convert_map_to_json_string(a_dict map[string]interface{}) string {
 	json_bytes, err := json.Marshal(a_dict)
 	if err != nil {
@@ -40,11 +58,11 @@ func Convert_struct_object_to_json_string(an_object interface{}) string {
 	return string_tool.Bytes_to_string(json_bytes)
 }
 
-func Convert_bytes_json_data_to_map(data []byte) (map[string]interface{}, error) {
-	var result map[string]interface{}
-	err := json.Unmarshal(data, &result)
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
+func Convert_map_to_struct_object(a_dict map[string]interface{}, the_memory_reference_to_that_object any) {
+	var json_string = Convert_map_to_json_string(a_dict)
+	json.Unmarshal([]byte(json_string), the_memory_reference_to_that_object)
+}
+
+func Convert_json_string_to_struct_object(json_string string, the_memory_reference_to_that_object any) {
+	json.Unmarshal([]byte(json_string), the_memory_reference_to_that_object)
 }
