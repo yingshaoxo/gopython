@@ -69,7 +69,11 @@ func Is_nullable_variable(a_variable any) bool {
 }
 
 func Get_value_from_nullable_variable(a_variable any) any {
-	return Get_value_from_struct_object_by_name(a_variable, "Value")
+	if Is_nullable_variable(a_variable) {
+		return Get_value_from_struct_object_by_name(a_variable, "Value")
+	} else {
+		return a_variable
+	}
 }
 
 func Is_it_null(a_variable any) bool {
@@ -116,4 +120,119 @@ func Get_key_value_dict_from_struct_object(an_object_instance any, lowercase_key
 	}
 
 	return key_value_dict
+}
+
+func Check_if_key_in_struct_object(an_object_instance any, key string, lowercase_key bool) bool {
+	object_key_representation := reflect.TypeOf(an_object_instance)
+
+	for i := 0; i < object_key_representation.NumField(); i++ {
+		var the_key = object_key_representation.Field(i).Name
+		if lowercase_key == true {
+			the_key = strings.ToLower(the_key)
+		}
+
+		if the_key == strings.ToLower(key) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func is_the_variable_an_enum_class(a_variable any) bool {
+	var yes = false
+
+	object_key_representation := reflect.TypeOf(a_variable)
+	object_value_representation := reflect.ValueOf(a_variable)
+
+	for i := 0; i < object_value_representation.NumField(); i++ {
+		var the_key = object_key_representation.Field(i).Name
+
+		if the_key == "Enum_value_" {
+			yes = true
+			break
+		}
+	}
+
+	return yes
+}
+
+func Convert_nullable_struct_into_dict(an_object_instance any, lowercase_the_key bool) any {
+	if an_object_instance == nil {
+		return nil
+	}
+
+	if Is_the_variable_a_list_object(an_object_instance) {
+		var new_list = make([]any, 0)
+		switch t := an_object_instance.(type) {
+		case []any:
+			for _, value := range t {
+				new_list = append(new_list, Convert_nullable_struct_into_dict(value, lowercase_the_key))
+			}
+		}
+		return new_list
+	}
+
+	if !Is_the_variable_a_struct_object(an_object_instance) {
+		return an_object_instance
+	}
+
+	if is_the_variable_an_enum_class(an_object_instance) {
+		var new_object = Get_value_from_struct_object_by_name(an_object_instance, "Enum_value_")
+
+		if Is_it_null(new_object) {
+			return nil
+		} else {
+			var new_value = Get_value_from_nullable_variable(new_object).(string)
+			if Check_if_key_in_struct_object(an_object_instance, new_value, true) {
+				if lowercase_the_key == true {
+					return strings.ToLower(new_value)
+				} else {
+					return new_value
+				}
+			} else {
+				return nil
+			}
+		}
+	}
+
+	var new_dict = make(map[string]any)
+
+	object_key_representation := reflect.TypeOf(an_object_instance)
+	object_value_representation := reflect.ValueOf(an_object_instance)
+
+	types := make([]any, object_key_representation.NumField())
+	values := make([]interface{}, object_value_representation.NumField())
+	for i := 0; i < object_value_representation.NumField(); i++ {
+		var the_key = object_key_representation.Field(i).Name
+		var the_type = object_key_representation.Field(i).Type.Name()
+		var the_value = object_value_representation.Field(i).Interface()
+		types[i] = the_type
+		values[i] = the_value
+
+		var is_nullable bool = false
+		if strings.Contains(the_type, "Type_Nullable[") {
+			is_nullable = true
+		}
+
+		var new_object any = nil
+		if is_nullable {
+			if Is_it_null(the_value) {
+				new_object = nil
+			} else {
+				var new_value = Get_value_from_nullable_variable(the_value)
+				new_object = Convert_nullable_struct_into_dict(new_value, lowercase_the_key)
+			}
+		} else {
+			new_object = Convert_nullable_struct_into_dict(the_value, lowercase_the_key)
+		}
+
+		if lowercase_the_key == true {
+			new_dict[strings.ToLower(the_key)] = new_object
+		} else {
+			new_dict[the_key] = new_object
+		}
+	}
+
+	return new_dict
 }
