@@ -59,6 +59,15 @@ func Is_the_variable_a_list_object(a_variable any) bool {
 	}
 }
 
+func Is_the_variable_a_dict_object(a_variable any) bool {
+	object_type_representation := reflect.TypeOf(a_variable).Kind()
+	if object_type_representation != reflect.Map {
+		return false
+	} else {
+		return true
+	}
+}
+
 func Is_nullable_variable(a_variable any) bool {
 	var the_type = Get_variable_type_string_representation(a_variable)
 	if strings.Contains(the_type, "Type_Nullable[") {
