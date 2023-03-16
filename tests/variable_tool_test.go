@@ -48,3 +48,10 @@ func Test_get_dict_from_class_object(t *testing.T) {
 	fmt.Println(variable_tool.Get_key_value_dict_from_struct_object(test_class, true))
 	fmt.Println(variable_tool.Get_key_value_dict_from_struct_object(test_class, false))
 }
+
+func Test_is_null_and_set_to_null(t *testing.T) {
+	var hi = variable_tool.Nullable("h").Set_to_null()
+
+	fmt.Println(hi)
+	fmt.Println(variable_tool.Is_it_null(hi))
+}

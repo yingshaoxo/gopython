@@ -12,6 +12,14 @@ type Type_Nullable[T any] struct {
 	Value   T
 }
 
+func (self Type_Nullable[T]) Set_to_null() Type_Nullable[T] {
+	var item T = self.Value
+	return Type_Nullable[T]{
+		Value:   item,
+		Is_null: true,
+	}
+}
+
 func Nullable[T any](value T) Type_Nullable[T] {
 	var item T = value
 	return Type_Nullable[T]{
@@ -64,7 +72,7 @@ func Get_value_from_nullable_variable(a_variable any) any {
 	return Get_value_from_struct_object_by_name(a_variable, "Value")
 }
 
-func Is_null(a_variable any) bool {
+func Is_it_null(a_variable any) bool {
 	return Get_value_from_struct_object_by_name(a_variable, "Is_null").(bool)
 }
 
