@@ -51,6 +51,23 @@ func Is_the_variable_a_list_object(a_variable any) bool {
 	}
 }
 
+func Is_nullable_variable(a_variable any) bool {
+	var the_type = Get_variable_type_string_representation(a_variable)
+	if strings.Contains(the_type, "Type_Nullable[") {
+		return true
+	} else {
+		return false
+	}
+}
+
+func Get_value_from_nullable_variable(a_variable any) any {
+	return Get_value_from_struct_object_by_name(a_variable, "Value")
+}
+
+func Is_null(a_variable any) bool {
+	return Get_value_from_struct_object_by_name(a_variable, "Is_null").(bool)
+}
+
 func Get_variable_type_string_representation(a_variable any) string {
 	return reflect.TypeOf(a_variable).Name()
 }
