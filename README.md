@@ -1,6 +1,10 @@
 # gopython
 Let you write go as if you were writing Python.
 
+> **Golang is garbage, you'd better use Python for your safety.**
+
+> **You may want to kill yourself at sometimes if you persistent to use Golang.**
+
 ## Usage
 ```bash
 go get github.com/yingshaoxo/gopython
