@@ -77,16 +77,16 @@ func Is_nullable_variable(a_variable any) bool {
 	}
 }
 
+func Is_it_null(a_variable any) bool {
+	return Get_value_from_struct_object_by_name(a_variable, "Is_null").(bool)
+}
+
 func Get_value_from_nullable_variable(a_variable any) any {
 	if Is_nullable_variable(a_variable) {
 		return Get_value_from_struct_object_by_name(a_variable, "Value")
 	} else {
 		return a_variable
 	}
-}
-
-func Is_it_null(a_variable any) bool {
-	return Get_value_from_struct_object_by_name(a_variable, "Is_null").(bool)
 }
 
 func Get_variable_type_string_representation(a_variable any) string {
@@ -146,6 +146,32 @@ func Check_if_key_in_struct_object(an_object_instance any, key string, lowercase
 	}
 
 	return false
+}
+
+func Get_element_type_of_a_list(a_list any) reflect.Type {
+	return reflect.TypeOf(a_list).Elem()
+}
+
+func Get_a_default_value_from_reflect_type(reflect_type reflect.Type) any {
+	return reflect.Zero(reflect_type).Interface()
+}
+
+func Call_struct_object_function(an_object any, method_name string, input_arguments_list []any) []any {
+	var type_of_an_element_in_a_list = reflect.TypeOf(an_object)
+	var instance_of_a_type = reflect.Zero(type_of_an_element_in_a_list)
+
+	var arguments []reflect.Value
+	for index := 0; index < len(input_arguments_list); index++ {
+		arguments = append(arguments, reflect.ValueOf(input_arguments_list[index]))
+	}
+	var reflect_type_output_list = instance_of_a_type.MethodByName(method_name).Call(arguments)
+
+	var outputs []any
+	for index := 0; index < len(reflect_type_output_list); index++ {
+		outputs = append(outputs, reflect_type_output_list[index].Interface())
+	}
+
+	return outputs
 }
 
 func is_the_variable_an_enum_class(a_variable any) bool {

@@ -42,6 +42,11 @@ type TestClass struct {
 	Name string
 }
 
+func (self TestClass) Say_hi(name string) string {
+	fmt.Println("hi", name)
+	return "done"
+}
+
 func Test_get_dict_from_class_object(t *testing.T) {
 	var test_class = TestClass{Name: "yingshaoxo"}
 
@@ -54,4 +59,11 @@ func Test_is_null_and_set_to_null(t *testing.T) {
 
 	fmt.Println(hi)
 	fmt.Println(variable_tool.Is_it_null(hi))
+}
+
+func Test_call_function_in_object(t *testing.T) {
+	var test_class = TestClass{Name: "yingshaoxo"}
+
+	var outputs = variable_tool.Call_struct_object_function(test_class, "Say_hi", []any{"yingshaoxo"})
+	fmt.Println(outputs)
 }
