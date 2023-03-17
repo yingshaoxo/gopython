@@ -157,6 +157,7 @@ func Get_a_default_value_from_reflect_type(reflect_type reflect.Type) any {
 }
 
 func Call_struct_object_function(an_object any, method_name string, input_arguments_list []any) []any {
+	// if the object you give is from reflect.ValueOf(), you need to call reflect.ValueOf().Interface()
 	var type_of_an_element_in_a_list = reflect.TypeOf(an_object)
 	var instance_of_a_type = reflect.Zero(type_of_an_element_in_a_list)
 
