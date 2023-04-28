@@ -327,7 +327,7 @@ func Convert_nullable_struct_into_dict(an_object_instance any, lowercase_the_key
 	return an_object_instance
 }
 
-func _convert_nullable_dict_into_compact_json_string(an_object_instance any) any {
+func Convert_nullable_dict_into_compact_json_string(an_object_instance any) any {
 	if an_object_instance == nil {
 		return `null`
 	}
@@ -341,7 +341,7 @@ func _convert_nullable_dict_into_compact_json_string(an_object_instance any) any
 		switch t := an_object_instance.(type) {
 		case []any:
 			for index, value := range t {
-				new_list_text += _convert_nullable_dict_into_compact_json_string(value).(string)
+				new_list_text += Convert_nullable_dict_into_compact_json_string(value).(string)
 				if index != len(t)-1 {
 					new_list_text += `, `
 				}
@@ -356,7 +356,7 @@ func _convert_nullable_dict_into_compact_json_string(an_object_instance any) any
 		var index int = 0
 		for key, value := range an_object_instance.(map[string]any) {
 			new_dict_string += `"` + key + `"` + `: `
-			new_dict_string += _convert_nullable_dict_into_compact_json_string(value).(string)
+			new_dict_string += Convert_nullable_dict_into_compact_json_string(value).(string)
 			if index != len(an_object_instance.(map[string]any))-1 {
 				new_dict_string += `, `
 			}
@@ -551,6 +551,11 @@ func _convert_dict_into_nullable_dict(a_dict any, a_refrence_object_instance any
 
 	new_dict, _ = json_tool.Convert_struct_object_to_map(new_dict)
 	return new_dict
+}
+
+func Convert_dict_into_nullable_struct[T any](a_dict any, an_object_instance *T) {
+	new_dict := _convert_dict_into_nullable_dict(a_dict, *an_object_instance)
+	json_tool.Convert_map_to_struct_object(new_dict, an_object_instance)
 }
 
 // func replace_null_to_null_identify_symbol(json_string string) string {
