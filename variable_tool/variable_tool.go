@@ -52,7 +52,7 @@ func Is_the_variable_a_struct_object(a_variable any) bool {
 
 func Is_the_variable_a_list_object(a_variable any) bool {
 	object_type_representation := reflect.TypeOf(a_variable).Kind()
-	if object_type_representation != reflect.Array {
+	if (object_type_representation != reflect.Array) && (object_type_representation != reflect.Slice) {
 		return false
 	} else {
 		return true
