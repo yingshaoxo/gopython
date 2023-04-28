@@ -90,7 +90,14 @@ func Get_value_from_nullable_variable(a_variable any) any {
 }
 
 func Get_variable_type_string_representation(a_variable any) string {
-	return reflect.TypeOf(a_variable).Name()
+	a_reflect := reflect.TypeOf(a_variable)
+	name := a_reflect.Name()
+	if len(strings.TrimSpace(name)) != 0 {
+		return name
+	} else {
+		return a_reflect.String()
+		// return fmt.Sprintf("%v", reflect.TypeOf(a_variable).Kind().String())
+	}
 }
 
 func Get_value_from_struct_object_by_name(an_object_instance any, key string) any {

@@ -67,3 +67,10 @@ func Test_call_function_in_object(t *testing.T) {
 	var outputs = variable_tool.Call_struct_object_function(test_class, "Say_hi", []any{"yingshaoxo"})
 	fmt.Println(outputs)
 }
+
+func Test_get_type_string(t *testing.T) {
+	// var test_class = TestClass{Name: "yingshaoxo"}
+	var hihi = "okok"
+
+	fmt.Println(variable_tool.Get_variable_type_string_representation(hihi))
+}
