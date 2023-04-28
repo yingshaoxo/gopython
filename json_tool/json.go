@@ -91,11 +91,11 @@ func Convert_struct_object_to_json_string(an_object any) string {
 	return string_tool.Bytes_to_string(json_bytes)
 }
 
-func Convert_map_to_struct_object(a_dict any, the_memory_reference_to_that_object any) {
+func Convert_map_to_struct_object[T any](a_dict any, the_memory_reference_to_that_object *T) {
 	var json_string = Convert_map_to_json_string(a_dict)
 	json.Unmarshal([]byte(json_string), the_memory_reference_to_that_object)
 }
 
-func Convert_json_string_to_struct_object(json_string string, the_memory_reference_to_that_object any) {
+func Convert_json_string_to_struct_object[T any](json_string string, the_memory_reference_to_that_object *T) {
 	json.Unmarshal([]byte(json_string), the_memory_reference_to_that_object)
 }
