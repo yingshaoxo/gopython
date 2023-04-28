@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"testing"
 
@@ -73,4 +74,9 @@ func Test_get_type_string(t *testing.T) {
 	var hihi = "okok"
 
 	fmt.Println(variable_tool.Get_variable_type_string_representation(hihi))
+}
+
+func Test_json_encoding(t *testing.T) {
+	y, _ := json.Marshal(`\n"ddd'}{,}`)
+	fmt.Println(string(y))
 }

@@ -5,40 +5,7 @@ import (
 	"encoding/json"
 
 	"github.com/yingshaoxo/gopython/string_tool"
-	"github.com/yingshaoxo/gopython/variable_tool"
 )
-
-func Convert_dirty_map_into_pure_map(an_object_instance any) any {
-	if an_object_instance == nil {
-		return nil
-	}
-
-	if variable_tool.Is_the_variable_a_struct_object(an_object_instance) {
-		a_map, _ := Convert_struct_object_to_map(an_object_instance)
-		return Convert_dirty_map_into_pure_map(a_map)
-	}
-
-	if variable_tool.Is_the_variable_a_list_object(an_object_instance) {
-		var new_list = make([]any, 0)
-		switch t := an_object_instance.(type) {
-		case []any:
-			for _, value := range t {
-				new_list = append(new_list, Convert_dirty_map_into_pure_map(value))
-			}
-		}
-		return new_list
-	}
-
-	if variable_tool.Is_the_variable_a_dict_object(an_object_instance) {
-		var new_dict = make(map[string]any)
-		for key, value := range an_object_instance.(map[string]any) {
-			new_dict[key] = Convert_dirty_map_into_pure_map(value)
-		}
-		return new_dict
-	}
-
-	return an_object_instance
-}
 
 func Convert_struct_object_to_map(an_object any) (map[string]interface{}, error) {
 	var a_dict map[string]interface{}
