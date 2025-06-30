@@ -10,6 +10,15 @@ Let you write go as if you were writing Python.
 go get github.com/yingshaoxo/gopython
 ```
 
+## Compile
+You know what? You can use golang1.10.8 in both windowsXP and old linux to build linux software.
+
+You just need to create a new folder and put your main go file into it, then inside of that folder, you do following:
+
+```
+CGO_ENABLED=0 GOOS=linux GOARCH=386 wine go.exe build -a -ldflags '-extldflags "-static"' -o test.run ./
+```
+
 ### Try-Catch
 ```go
 package main
